@@ -13,7 +13,11 @@ var (
 type jsonArray []interface{}
 
 func (a jsonArray) Value() (driver.Value, error) {
-	return json.Marshal(a)
+	var arr []byte
+	for _, v := range a {
+		arr = append(arr, byte(v.(int)))
+	}
+	return arr, nil
 }
 
 type jsonMap map[string]interface{}
